@@ -62,8 +62,13 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_ALL_HEADERS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'https://8000-idx-sail-1717595766460.cluster-joak5ukfbnbyqspg4tewa33d24.cloudworkstations.dev',
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8080",
+    "http://localhost:8080",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 ROOT_URLCONF = 'SAILearningAPI.urls'
