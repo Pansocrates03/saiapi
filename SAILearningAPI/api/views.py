@@ -16,7 +16,7 @@ import pickle
 import numpy as np
 
 # Load your model once at the module level
-model_dict = pickle.load(open('./api/model_PRO.p', 'rb'))
+model_dict = pickle.load(open('./api/model_PRO3.p', 'rb'))
 model = model_dict['model']
 
 mp_hands = mp.solutions.hands
