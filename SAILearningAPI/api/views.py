@@ -40,34 +40,54 @@ class FileUploadView(APIView):
                 destination.write(chunk)
                 print(destination.name)
 
-        data = []
-        labels = []
+        data_aux = []
         # Leer la imagen
-        img = cv2.imread(destination.name)
-        if img is not None:  # Asegúrate de que la imagen se ha leído correctamente
-            img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        frame = cv2.imread(destination.name)
+        if frame is not None:
+            frame = cv2.flip(frame, 1)
+            H, W, _ = frame.shape  # Asegúrate de que la imagen se ha leído correctamente
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            # Procesar la imagen con mediapipe
-            results = hands.process(img_rgb)
+            results = hands.process(frame_rgb)
+
             if results.multi_hand_landmarks:
+        #muesta imagen con landmarks
                 for hand_landmarks in results.multi_hand_landmarks:
-                    for i in range(len(hand_landmarks.landmark)):
-                        x = hand_landmarks.landmark[i].x
-                        y = hand_landmarks.landmark[i].y
-                        data_aux.append(x)
-                        data_aux.append(y)
+                    mp_drawing.draw_landmarks(
+                        frame, #imagen a dibujar
+                        hand_landmarks, #output del modelo
+                        mp_hands.HAND_CONNECTIONS,
+                        mp_drawing_styles.get_default_hand_landmarks_style(),
+                        mp_drawing_styles.get_default_hand_connections_style()            
+                )
+           
 
-                # Asegúrate de que tienes las 42 coordenadas (21 puntos de referencia, cada uno con x e y)
-                if len(data_aux) == 42:
-                    data.append(data_aux)
-                    labels.append(letra_carpeta)
+                if hand_landmarks is not None:
+                    for hand_landmarks in results.multi_hand_landmarks:
+                        data_aux = []
+                        X_ = []
+                        Y_ = []
 
-    # Cerrar el objeto mediapipe
-        hands.close()
+                        for i in range(len(hand_landmarks.landmark)):
+                            x = hand_landmarks.landmark[i].x
+                            y = hand_landmarks.landmark[i].y
+                            data_aux.append(x)
+                            data_aux.append(y)
+                            X_.append(x)
+                            Y_.append(y)
 
+                        x1 = int(min(X_) * W)
+                        y1 = int(min(Y_) * H)
+                        x2 = int(max(X_) * W)
+                        y2 = int(max(Y_) * H)
 
+                        prediction = model.predict([np.asarray(data_aux)])
+                        predicted_character = prediction[0]
+            else:
+                predicted_character = 'No se detecto mano'
 
-        return Response({'edi': predictions}, status=status.HTTP_201_CREATED)
+        print(predicted_character)
+        return Response({'letra':predicted_character}, status=status.HTTP_201_CREATED)
         
 
 
