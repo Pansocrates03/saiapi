@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI Learning</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link rel="stylesheet" href="https://use.typekit.net/ouq2fal.css">
+</head>
+<body>
+    <header class="App-header">
+        <img src="{% static 'images/Asset 7@4x.png' %}" class="chiquito">
+    </header>
+    <main>
+        <div class="register-container">
+            <h2>Inicia Sesión</h2>
+            <form id="register-form" method="POST" action="{% url 'perfiles:login' %}">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                {% if messages %}
+                    <div class="error-message">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn-create-account">Iniciar Sesión</button>
+                <button type="button" class="btn-existing-account" onclick="redirectToRegister()">Registrarme</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
+
+<script>
+    function redirectToRegister() {
+        window.location.href = "{% url 'perfiles:register' %}";
+    }
+</script>

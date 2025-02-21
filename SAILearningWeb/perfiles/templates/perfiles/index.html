@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SAI Learn</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+  </head>
+  <body>
+    <menu>
+        <!-- img src="{% static 'images/logo.jpg' %}"-->
+        <div class="header-logo-container">
+          <img src="{% static 'images/Asset 26@4x.png' %}" class="logo">
+          <div><span style="font-weight: 700;">SAI</span>Learning</div>
+        </div>
+        <button type="button" onclick="redirectToLogin()"><a>Comienza aquí</a></button>
+    </menu>
+    <main>
+      <div class="banner">
+        <div>
+          <h1>Aprende lengua de señas</h1>
+          <p>Utilizando el poder de inteligencia artificial. Rápido. Interactivo. Sencillo.</p>
+        </div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/E85Em8CPPvk?si=MKKfnWVXelhYKOtc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div>
+      <div class="info">
+        <h2>¿Cómo funciona?</h2>
+        <p>
+          SAI Learning es una plataforma de aprendizaje de lengua de señas
+          que utiliza inteligencia artificial para enseñarte de manera rápida
+          y sencilla. Solo necesitas una cámara y conexión a internet.
+        </p>
+      </div>
+      <!--<div class="steps">
+        <div class="step">
+          <img>
+        </div>
+      </div>-->
+      <div class="info">
+        <h2>¿Por qué aprender lengua de señas?</h2>
+        <p>
+          En méxico más de 2.3 millones de personas padecen una 
+          discapacidad auditiva, sin embargo solamente 300 mil personas
+          pueden comunicarse físicamente a través de la lengua de señas
+          mexicana (LSM) 
+          La lengua de señas es un lenguaje visual y gestual utilizado
+          por personas con discapacidades auditivas para comunicarse entre
+          sí, y con personas oyentes.
+          Aprender lengua de señas no solo te permitirá comunicarte con
+          este grupo de personas, sino que ayudas a tu comunidad a convertirse
+          en un espacio más inclusivo para todas las personas.
+        </p>
+      </div>
+      <div class="info">
+        <h2>¿Quiénes somos?</h2>
+        <p>
+          Somos un equipo de desarrolladores y diseñadores apasionados por la
+          tecnología y la inclusión. Creemos en el poder de la tecnología para
+          transformar la educación y la accesibilidad, y estamos comprometidos
+          en hacer de SAI Learn una plataforma de aprendizaje de lengua de señas
+          accesible y efectiva.
+        </p>
+      </div>
+      <div>
+        <h2>¿Qué dicen nuestros usuarios?</h2>
+        <div class="testimonials">
+          <div class="testimonial">
+            <img>
+            <p>“SAI Learn es una plataforma increíble. Me ha ayudado a aprender lengua de señas de manera rápida y sencilla. ¡Gracias!”</p>
+            <span>- María, estudiante</span>
+          </div>
+          <div class="testimonial">
+            <img>
+            <p>“SAI Learn es una plataforma increíble. Me ha ayudado a aprender lengua de señas de manera rápida y sencilla. ¡Gracias!”</p>
+            <span>- María, estudiante</span>
+          </div>
+          <div class="testimonial">
+            <img>
+            <p>“SAI Learn es una plataforma increíble. Me ha ayudado a aprender lengua de señas de manera rápida y sencilla. ¡Gracias!”</p>
+            <span>- María, estudiante</span>
+          </div>
+        </div>
+      </div>
+      
+    </main>
+    <footer>
+    </footer>
+
+  </body>
+</html>
+
+<script>
+  function redirectToLogin() {
+      window.location.href = "{% url 'levels:avance' %}";
+  }
+</script>

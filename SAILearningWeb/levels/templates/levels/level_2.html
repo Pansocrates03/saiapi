@@ -1,0 +1,63 @@
+<!-- https://www.kirupa.com/html5/accessing_your_webcam_in_html5.html -->
+
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Display Webcam Stream</title>
+    <link rel="stylesheet" href="{% static 'level.css' %}">
+</head>
+ 
+<body>
+    <header>
+
+        <div class="header-logo">
+            <span class="bold">SAI</span>Learning
+        </div>
+
+        <h1>Nivel {{perfil.nivel}}</h1>
+
+        <a class="header-dropdown" onclick="myFunctin()">
+            <span class="user-info">{{user.username|title}}<br>Nivel {{perfil.nivel}}</span>
+            <img href="{% static 'images/Asset 26@4x.png' %}" class="profile-picture">
+            <div class="dropdownLink" id="ddl">
+                <a>Perfil</a>
+                <a>Glosario</a>
+                <a>Cerrar Sesión</a>
+            </div>
+        </a>
+
+      </header>
+    <main>
+
+            <div class="left-container">
+                <div class="muestra">Muestra la letra</div>
+                <img src="{% static '/images/letrasLSM/letra_b.png' %}" class="letras">
+            </div>
+
+            <div id="container">
+                <video autoplay="true" id="videoElement" style="transform: scaleX(-1)">
+                    Your browser does not support the video tag.
+                </video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <h3 id="detectador">Actualmente detectando: --</h3>
+            </div>
+
+            <div class="right-container">
+                <div class="semaforo"></div>
+                
+                <div class="semaforo"></div> 
+                
+                <div class="semaforo"></div> 
+                
+                <div class="semaforo"></div>
+                
+                <div class="semaforo"></div>         
+        </div>
+
+    </main>
+
+    <script src="{% static 'level.js' %}"></script>
+</body>
+</html>

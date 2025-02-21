@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI Learning</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+    <link rel="stylesheet" href="https://use.typekit.net/ouq2fal.css">
+</head>
+<body>
+    <header class="App-header">
+        <img src="{% static 'images/Asset 7@4x.png' %}" class="chiquito">
+    </header>
+    <main>
+        <div class="register-container">
+            <h2>¡Regístrate!</h2>
+            <form id="register-form" method="POST" action="{% url 'perfiles:register' %}">
+                {% csrf_token %}
+                {{ user_form.username }} 
+                {{ user_form.email }}
+                {{ user_form.password }}
+                {{ user_form.password_confirm }}
+                <div class="error-message">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}    
+                </div>
+                <small id="password-error" class="error-password" style="display: none; color: red;">Las contraseñas deben de ser iguales</small>
+                <button type="button" class="btn-existing-account" onclick="redirectToLogin()">¡Ya tengo cuenta!</button>
+                <button type="submit" class="btn-create-account">Crear Cuenta</button>
+            </form>
+            <p>Al crear una cuenta aceptas nuestros <a href="#">términos y condiciones</a></p>
+        </div>
+    </main>
+    <script>
+        function redirectToLogin() {
+            window.location.href = "{% url 'perfiles:login' %}";
+        }
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            const password = document.querySelector('input[name="password"]').value;
+            const confirmPassword = document.querySelector('input[name="password_confirm"]').value;
+
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                document.getElementById('password-error').style.display = 'block';
+            } else {
+                document.getElementById('password-error').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

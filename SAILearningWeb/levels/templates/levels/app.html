@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAILearn</title>
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <link rel="stylesheet" href="https://use.typekit.net/ouq2fal.css">
+</head>
+
+<body>
+
+    <header>
+
+      <a class="header-logo">
+        <span class="bold">SAI</span>Learning
+      </a>
+
+
+      <a class="header-dropdown" onclick="myFunctin()">
+        <span class="user-info">{{user.username|title}}<br>Nivel {{perfil.nivel}}</span>
+        <img src="{% static 'images/Asset 26@4x.png' %}" class="profile-picture">
+        <div class="dropdownLink" id="ddl">
+          <a class="dropdownLink-button" onclick="redirectLogout()">Cerrar sesión</a>
+        </div>
+      </a>
+    </header>
+
+    <script src="{% static 'app.js' %}"></script>
+
+    <main>
+
+      <div class="horizontal-scroll-wrapper squares">
+        {% for nivel in niveles %}
+          {% if nivel <= nivel_actual %}
+              {% if nivel == nivel_actual %}
+                  <a class="select" href="{% url 'levels:level' nivel %}">{{ nivel }}</a>
+              {% else %}
+                  <a class="active" href="{% url 'levels:level' nivel %}">{{ nivel }}</a>
+              {% endif %}
+          {% else %}
+              <a>{{ nivel }}</a>
+          {% endif %}
+{% endfor %}
+      </div>
+
+      <a class="btn-startLevel" href="https://google.com">
+        <span>¡Continúa aprendiendo!</span>
+      </a>
+    </main>
+      
+</body>
+</html>
